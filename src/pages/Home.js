@@ -9,38 +9,10 @@ import axios from "axios";
 const Home = () => {
   const [filmList, setFilmList] = useState([]);
   const [filmStats, setFilmStats] = useState([]);
-  const getViewers = async () => {
-    try {
-      const viewers = await axios.get(urlTest());
-      console.log(viewers);
-      setFilmStats((filmStats) => [
-        ...filmStats,
-        viewers.data.items[0].statistics.viewCount,
-      ]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const addFilm = (e) => {
-    e.preventDefault();
-    const pole = document.querySelector(".link");
-    console.log(pole.value);
-    setFilmList((filmList) => [...filmList, pole.value]);
-    console.log(filmList);
-    console.log(urlTest());
-    getViewers();
-  };
-
-  const clearFilmList = () => {
-    setFilmList = [""];
-  };
-  const nothing = () => {
-    return null;
-  };
   return (
     <Main>
-      <h1> Hi bro whats up !? da</h1>
+      <h1> Hej! Tutaj możesz zapisać swoje ulubione filmy</h1>
       <FilmLinker
         filmList={filmList}
         setFilmList={setFilmList}
@@ -56,6 +28,9 @@ const Home = () => {
 const Main = styled.div`
   display: flex;
   flex-direction: column;
+  h1 {
+    margin: 1rem 1rem 3rem 1rem;
+  }
 `;
 const MainForm = styled.form`
   display: flex;

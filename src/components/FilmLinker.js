@@ -14,18 +14,6 @@ export const FilmLinker = ({
   const dispatch = useDispatch();
   const { stats } = useSelector((state) => state.film);
 
-  // const getViewers = async () => {
-  //   try {
-  //     const viewers = await axios.get(urlTest());
-  //     console.log(viewers);
-  //     setFilmStats((filmStats) => [
-  //       ...filmStats,
-  //       viewers.data.items[0].statistics.viewCount,
-  //     ]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const loadFilmHandler = (id) => {
     dispatch(loadFilms(id));
   };
@@ -38,37 +26,25 @@ export const FilmLinker = ({
   const addFilm = (e) => {
     e.preventDefault();
     const pole = document.querySelector(".link");
-    console.log(pole.value);
-
-    console.log(filmList);
-    // console.log(urlTest());
-    // getViewers();
     checkLink(pole.value);
     loadFilmHandler(checkLink(pole.value));
     setFilmList((filmList) => [...filmList, pole.value]);
+    pole.value = "";
   };
 
   const clearFilmList = () => {
     setFilmList = [""];
   };
-  const nothing = () => {
-    return null;
-  };
 
   return (
     <MainForm>
-      <label>
-        Link:
+      <Label>
+        <h3> Podaj link lub id filmu: </h3>
         <input className="link" type="text" />{" "}
-      </label>
+      </Label>
       <input type="submit" onClick={addFilm} />
-      <textarea value={filmList} onChange={nothing}></textarea>
       <input type="submit" value="clear" onClick={clearFilmList} />
-      <textarea value={filmStats} onChange={nothing}></textarea>
-      <div className="Listing">
-        {stats &&
-          stats.map((stat) => <Film info={stat.statistics.viewCount}> </Film>)}
-      </div>
+      <List>{stats && stats.map((stat) => <Film info={stat}> </Film>)}</List>
     </MainForm>
   );
 };
@@ -76,7 +52,20 @@ const MainForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-items: center;
   gap: 10px;
+`;
+const Label = styled.label`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const List = styled.div`
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
 `;
 
 export default FilmLinker;
