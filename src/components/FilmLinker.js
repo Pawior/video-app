@@ -4,6 +4,7 @@ import urlTest from "../api";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFilms } from "../actions/filmAction";
+import Film from "../pages/Film";
 export const FilmLinker = ({
   filmList,
   setFilmList,
@@ -64,6 +65,10 @@ export const FilmLinker = ({
       <textarea value={filmList} onChange={nothing}></textarea>
       <input type="submit" value="clear" onClick={clearFilmList} />
       <textarea value={filmStats} onChange={nothing}></textarea>
+      <div className="Listing">
+        {stats &&
+          stats.map((stat) => <Film info={stat.statistics.viewCount}> </Film>)}
+      </div>
     </MainForm>
   );
 };

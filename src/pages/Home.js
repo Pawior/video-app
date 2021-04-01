@@ -49,16 +49,6 @@ const Home = () => {
       >
         {" "}
       </FilmLinker>
-      <MainForm>
-        <label>
-          Link:
-          <input className="link" type="text" />{" "}
-        </label>
-        <input type="submit" onClick={addFilm} />
-        <textarea value={filmList} onChange={nothing}></textarea>
-        <input type="submit" value="clear" onClick={clearFilmList} />
-        <textarea value={filmStats} onChange={nothing}></textarea>
-      </MainForm>
     </Main>
   );
 };
