@@ -16,6 +16,14 @@ export const loadFilms = (id) => async (dispatch) => {
       stats: filmData.data.items[0],
     },
   });
+  // function removeFilms() {
+  //   dispatch({
+  //     type: "REMOVE_FILM",
+  //     payload: {
+  //       stats: filmData.data.items[0],
+  //     },
+  //   });
+  // }
 };
 
 export default loadFilms;

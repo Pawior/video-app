@@ -32,6 +32,7 @@ const Main = styled.div`
     margin: 1rem 1rem 3rem 1rem;
   }
 `;
+
 const MainForm = styled.form`
   display: flex;
   flex-direction: column;

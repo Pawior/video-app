@@ -26,10 +26,12 @@ export const FilmLinker = ({
   const addFilm = (e) => {
     e.preventDefault();
     const pole = document.querySelector(".link");
-    checkLink(pole.value);
-    loadFilmHandler(checkLink(pole.value));
-    setFilmList((filmList) => [...filmList, pole.value]);
-    pole.value = "";
+    if (pole.value != "") {
+      checkLink(pole.value);
+      loadFilmHandler(checkLink(pole.value));
+      setFilmList((filmList) => [...filmList, pole.value]);
+      pole.value = "";
+    }
   };
 
   const clearFilmList = () => {
@@ -44,7 +46,15 @@ export const FilmLinker = ({
       </Label>
       <input type="submit" onClick={addFilm} />
       <input type="submit" value="clear" onClick={clearFilmList} />
-      <List>{stats && stats.map((stat) => <Film info={stat}> </Film>)}</List>
+      <List>
+        {stats &&
+          stats.map((stat) => (
+            <Film info={stat} id={stat.etag}>
+              {" "}
+            </Film>
+          ))}
+      </List>
+      <Footer> </Footer>
     </MainForm>
   );
 };
@@ -66,6 +76,9 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   gap: 100px;
+`;
+const Footer = styled.div`
+  min-height: 10vh;
 `;
 
 export default FilmLinker;
