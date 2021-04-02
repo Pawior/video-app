@@ -17,6 +17,8 @@ import { loadFilms } from "../actions/filmAction";
 import { deleteItem } from "../actions/filmDelete";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import YoutubeEmbed from "../components/YoutubeEmbed";
+import "../styles/_modal.scss";
 
 const Film = ({ info, id }) => {
   const [star, setStar] = useState(false);
@@ -79,11 +81,19 @@ const Film = ({ info, id }) => {
           onClick={handleShow}
         ></FontAwesomeIcon>
       </Play>
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        show={show}
+        contentClassName="custom-modal-style"
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <YoutubeEmbed embedId={info.id}> </YoutubeEmbed>{" "}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
