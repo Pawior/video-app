@@ -83,23 +83,20 @@ const Film = ({ info, id }) => {
       </Play>
       <Modal
         show={show}
-        contentClassName="custom-modal-style"
+        // contentClassName="custom-modal-style"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
-        centered
+        dialogClassName="custom-dialog"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{info.snippet.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="d-flex justify-content-center">
           <YoutubeEmbed embedId={info.id}> </YoutubeEmbed>{" "}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
