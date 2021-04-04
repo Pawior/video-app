@@ -17,11 +17,11 @@ const Paginationed = ({ postsPerPage, totalPosts, paginate, stats }) => {
     pageNumbers.push(
       <Pagination.Item
         key={number}
-        active={number == active}
         onClick={() => {
           paginate(number);
           active = number + 1;
         }}
+        active={number == active}
       >
         {number}
       </Pagination.Item>
