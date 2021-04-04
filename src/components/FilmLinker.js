@@ -5,6 +5,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFilms } from "../actions/filmAction";
 import Film from "../pages/Film";
+import Posts from "../pages/Posts";
+import PageItem from "react-bootstrap/PageItem";
+import Paginationed from "../components/Pagination";
+import Pagination from "react-bootstrap/Pagination";
+
 export const FilmLinker = ({
   filmList,
   setFilmList,
@@ -13,6 +18,15 @@ export const FilmLinker = ({
 }) => {
   const dispatch = useDispatch();
   const { stats } = useSelector((state) => state.film);
+  // Pagination
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(4);
+  // Current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
 
   const loadFilmHandler = (id) => {
     dispatch(loadFilms(id));
@@ -38,6 +52,9 @@ export const FilmLinker = ({
     setFilmList = [""];
   };
 
+  // Make paginate
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <MainForm>
       <Label>
@@ -46,14 +63,21 @@ export const FilmLinker = ({
       </Label>
       <input type="submit" onClick={addFilm} />
       <input type="submit" value="clear" onClick={clearFilmList} />
-      <List>
+      <Posts posts={currentPosts}> </Posts>
+      <Paginationed
+        postsPerPage={postsPerPage}
+        totalPosts={stats.length}
+        paginate={paginate}
+        stats={stats}
+      />
+      {/* <List>
         {stats &&
           stats.map((stat) => (
             <Film info={stat} id={stat.etag}>
               {" "}
             </Film>
           ))}
-      </List>
+      </List> */}
       <Footer> </Footer>
     </MainForm>
   );
