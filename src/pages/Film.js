@@ -20,7 +20,8 @@ import Button from "react-bootstrap/Button";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import "../styles/_modal.scss";
 
-const Film = ({ info, id }) => {
+const Film = ({ info, id, date }) => {
+  // const { stats, date } = useSelector((state) => state.film);
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -34,7 +35,8 @@ const Film = ({ info, id }) => {
   };
   return (
     <StyledFilm>
-      <h1> {info.snippet.title}</h1>{" "}
+      <h1> {info.snippet.title} + dsa</h1>
+      <h1> ds{date}</h1>
       <Trash>
         {" "}
         <FontAwesomeIcon

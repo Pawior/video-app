@@ -17,7 +17,7 @@ export const FilmLinker = ({
   setFilmStats,
 }) => {
   const dispatch = useDispatch();
-  const { stats } = useSelector((state) => state.film);
+  const { stats, date } = useSelector((state) => state.film);
   // Pagination
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -64,7 +64,9 @@ export const FilmLinker = ({
       <input type="submit" onClick={addFilm} />
       <input type="submit" value="clear" onClick={clearFilmList} />
       <List>
-        <Posts posts={currentPosts}> </Posts>
+        <Posts posts={currentPosts} date={date}>
+          {" "}
+        </Posts>
       </List>
       <Paginationed
         postsPerPage={postsPerPage}

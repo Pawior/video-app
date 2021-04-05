@@ -1,11 +1,11 @@
 import React from "react";
 import Film from "./Film";
-const Posts = ({ posts }) => {
+const Posts = ({ posts, date }) => {
   return (
     <>
       {posts &&
         posts.map((post) => (
-          <Film info={post} id={post.etag}>
+          <Film info={post} date={date} id={post.etag}>
             {" "}
           </Film>
         ))}

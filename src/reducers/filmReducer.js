@@ -8,6 +8,7 @@ const filmReducer = (state = initState, action) => {
       return {
         ...state,
         stats: [...state.stats, action.payload.stats],
+        date: action.payload.date,
       };
     case "REMOVE_FILM": {
       return {
