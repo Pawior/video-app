@@ -63,12 +63,15 @@ export const FilmLinker = ({
       </Label>
       <input type="submit" onClick={addFilm} />
       <input type="submit" value="clear" onClick={clearFilmList} />
-      <Posts posts={currentPosts}> </Posts>
+      <List>
+        <Posts posts={currentPosts}> </Posts>
+      </List>
       <Paginationed
         postsPerPage={postsPerPage}
         totalPosts={stats.length}
         paginate={paginate}
         stats={stats}
+        currentPage={currentPage}
       />
       {/* <List>
         {stats &&
@@ -99,7 +102,7 @@ const List = styled.div`
   margin-top: 10vh;
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 3rem;
 `;
 const Footer = styled.div`
   min-height: 10vh;

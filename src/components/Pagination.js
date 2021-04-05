@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import Pagination from "react-bootstrap/Pagination";
 import PageItem from "react-bootstrap/PageItem";
 
-const Paginationed = ({ postsPerPage, totalPosts, paginate, stats }) => {
+const Paginationed = ({
+  postsPerPage,
+  totalPosts,
+  paginate,
+  stats,
+  currentPage,
+}) => {
   //   const [active, setActive] = useState(false);
   const pageNumbers = [];
   //   const activeHandler = () => {
@@ -21,7 +27,7 @@ const Paginationed = ({ postsPerPage, totalPosts, paginate, stats }) => {
           paginate(number);
           active = number + 1;
         }}
-        active={number == active}
+        active={currentPage == number}
       >
         {number}
       </Pagination.Item>
