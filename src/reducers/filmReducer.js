@@ -1,6 +1,5 @@
 const initState = {
   stats: [],
-  date: "",
 };
 
 const filmReducer = (state = initState, action) => {
@@ -9,12 +8,13 @@ const filmReducer = (state = initState, action) => {
       return {
         ...state,
         stats: [...state.stats, action.payload.stats],
-        date: action.payload.date,
       };
     case "REMOVE_FILM": {
       return {
         ...state,
-        stats: state.stats.filter((item, index) => item.etag != action.payload),
+        stats: state.stats.filter(
+          (item, index) => item[0].etag != action.payload
+        ),
       };
     }
     default:

@@ -12,8 +12,7 @@ export const loadFilms = (id) => async (dispatch) => {
   dispatch({
     type: "FETCH_FILM",
     payload: {
-      stats: filmData.data.items[0],
-      date: new Date().toLocaleDateString(),
+      stats: [filmData.data.items[0], new Date().toLocaleDateString()],
     },
   });
   // function removeFilms() {

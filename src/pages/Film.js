@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,8 +20,13 @@ import Button from "react-bootstrap/Button";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import "../styles/_modal.scss";
 
-const Film = ({ info, id, date }) => {
+const Film = ({ info, id }) => {
   // const { stats, date } = useSelector((state) => state.film);
+  useEffect(() => {
+    console.log(info);
+    console.log(id);
+    console.log(info[0]);
+  }, []);
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -35,9 +40,8 @@ const Film = ({ info, id, date }) => {
   };
   return (
     <StyledFilm>
-      <h1> {info.snippet.title} </h1>
-      <h4> {date}</h4>
-      <h4> {new Date().toLocaleDateString()}</h4>
+      <h1> {info[0].snippet.title} </h1>
+      <h4> {info[1]}</h4>
       <Trash>
         {" "}
         <FontAwesomeIcon
@@ -64,16 +68,19 @@ const Film = ({ info, id, date }) => {
         <p>
           {" "}
           <FontAwesomeIcon icon={faEye}> </FontAwesomeIcon>{" "}
-          {info.statistics.viewCount}{" "}
+          {info[0].statistics.viewCount}{" "}
         </p>
         <p>
           {" "}
           <FontAwesomeIcon icon={faThumbsUp}> </FontAwesomeIcon>{" "}
-          {info.statistics.likeCount}
+          {info[0].statistics.likeCount}
         </p>
       </Stats>
-      {info && (
-        <Thumbnail src={info.snippet.thumbnails.maxres.url} alt="thumbnail" />
+      {info[0] && (
+        <Thumbnail
+          src={info[0].snippet.thumbnails.maxres.url}
+          alt="thumbnail"
+        />
       )}
       <Play>
         {" "}
@@ -92,10 +99,10 @@ const Film = ({ info, id, date }) => {
         dialogClassName="custom-dialog"
       >
         <Modal.Header closeButton>
-          <Modal.Title>{info.snippet.title}</Modal.Title>
+          <Modal.Title>{info[0].snippet.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
-          <YoutubeEmbed embedId={info.id}> </YoutubeEmbed>{" "}
+          <YoutubeEmbed embedId={info[0].id}> </YoutubeEmbed>{" "}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
