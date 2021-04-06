@@ -32,7 +32,6 @@ const Paginationed = ({
         {number}
       </Pagination.Item>
     );
-    console.log(pageNumbers);
   }
 
   return (

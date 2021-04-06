@@ -6,10 +6,9 @@ export const loadFilms = (id) => async (dispatch) => {
   const filmData = await axios
     .get(`${baseUrl()}${id}&key=${key()}&${params()}`)
     .catch((err) => {
-      // what now?
       console.log(err);
     });
-  console.log(id);
+  console.log(`${baseUrl()}${id}&key=${key()}&${params()}`);
   dispatch({
     type: "FETCH_FILM",
     payload: {

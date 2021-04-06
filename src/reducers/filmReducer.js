@@ -1,5 +1,6 @@
 const initState = {
   stats: [],
+  date: "",
 };
 
 const filmReducer = (state = initState, action) => {

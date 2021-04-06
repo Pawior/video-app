@@ -35,8 +35,9 @@ const Film = ({ info, id, date }) => {
   };
   return (
     <StyledFilm>
-      <h1> {info.snippet.title} + dsa</h1>
-      <h1> ds{date}</h1>
+      <h1> {info.snippet.title} + </h1>
+      <h4> {date}</h4>
+      <h4> {new Date().toLocaleDateString()}</h4>
       <Trash>
         {" "}
         <FontAwesomeIcon
