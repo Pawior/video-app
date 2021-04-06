@@ -12,9 +12,7 @@ const filmReducer = (state = initState, action) => {
     case "REMOVE_FILM": {
       return {
         ...state,
-        stats: state.stats.filter(
-          (item, index) => item[0].etag != action.payload
-        ),
+        stats: state.stats.filter((item, index) => item[2] != action.payload),
       };
     }
     default:

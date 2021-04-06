@@ -5,7 +5,7 @@ const Posts = ({ posts }) => {
     <>
       {posts[0] &&
         posts.map((post) => (
-          <Film info={post} id={post[0].etag}>
+          <Film info={post} id={post[2]}>
             {" "}
           </Film>
         ))}
