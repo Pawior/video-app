@@ -4,6 +4,7 @@ import urlTest from "../api";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFilms } from "../actions/filmAction";
+import { clearFilms } from "../actions/filmsClear";
 import Film from "../pages/Film";
 import Posts from "../pages/Posts";
 import PageItem from "react-bootstrap/PageItem";
@@ -48,8 +49,11 @@ export const FilmLinker = ({
     }
   };
 
-  const clearFilmList = () => {
-    setFilmList = [""];
+  const clearFilmList = (e) => {
+    e.preventDefault();
+    dispatch(clearFilms());
+    // localStorage.setItem("state", JSON.stringify([]));
+    localStorage.clear();
   };
 
   // Make paginate

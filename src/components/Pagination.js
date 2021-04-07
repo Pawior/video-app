@@ -30,7 +30,7 @@ const Paginationed = ({
     );
   }
   useEffect(() => {
-    if (posts.length == 0) {
+    if (posts.length == 0 && currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   }, [posts]);

@@ -75,7 +75,7 @@ const Film = ({ info, id }) => {
           {info[0].statistics.likeCount}
         </p>
       </Stats>
-      {info[2] && (
+      {info[0] && (
         <Thumbnail src={info[0].snippet.thumbnails.high.url} alt="thumbnail" />
       )}
       <Play>

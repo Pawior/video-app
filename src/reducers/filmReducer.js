@@ -15,7 +15,9 @@ const filmReducer = (state = initState, action) => {
         stats: state.stats.filter((item, index) => item[2] != action.payload),
       };
     }
-
+    case "CLEAR_FILMS": {
+      return { stats: [] };
+    }
     default:
       return { ...state };
   }
