@@ -72,6 +72,8 @@ export const FilmLinker = ({
         paginate={paginate}
         stats={stats}
         currentPage={currentPage}
+        posts={currentPosts}
+        setCurrentPage={setCurrentPage}
       />
       {/* <List>
         {stats &&

@@ -21,7 +21,6 @@ import YoutubeEmbed from "../components/YoutubeEmbed";
 import "../styles/_modal.scss";
 
 const Film = ({ info, id }) => {
-  // const { stats, date } = useSelector((state) => state.film);
   useEffect(() => {
     console.log(info);
     console.log(id);
@@ -76,11 +75,8 @@ const Film = ({ info, id }) => {
           {info[0].statistics.likeCount}
         </p>
       </Stats>
-      {info[0] && (
-        <Thumbnail
-          src={info[0].snippet.thumbnails.maxres.url}
-          alt="thumbnail"
-        />
+      {info[2] && (
+        <Thumbnail src={info[0].snippet.thumbnails.high.url} alt="thumbnail" />
       )}
       <Play>
         {" "}

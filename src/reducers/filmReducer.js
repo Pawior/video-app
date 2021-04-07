@@ -15,6 +15,7 @@ const filmReducer = (state = initState, action) => {
         stats: state.stats.filter((item, index) => item[2] != action.payload),
       };
     }
+
     default:
       return { ...state };
   }
