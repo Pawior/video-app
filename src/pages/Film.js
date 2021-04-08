@@ -21,11 +21,11 @@ import YoutubeEmbed from "../components/YoutubeEmbed";
 import "../styles/_modal.scss";
 
 const Film = ({ info, id }) => {
-  useEffect(() => {
-    console.log(info);
-    console.log(id);
-    console.log(info[0]);
-  }, []);
+  // useEffect(() => {
+  //   console.log(info);
+  //   console.log(id);
+  //   console.log(info[0]);
+  // }, []);
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -40,7 +40,7 @@ const Film = ({ info, id }) => {
   return (
     <StyledFilm>
       <h1> {info[0].snippet.title} </h1>
-      <h4> {info[1]}</h4>
+      <h4> {info[1].slice(0, info[1].lastIndexOf(","))}</h4>
       <Trash>
         {" "}
         <FontAwesomeIcon

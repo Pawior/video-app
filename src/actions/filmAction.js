@@ -9,16 +9,11 @@ export const loadFilms = (id) => async (dispatch) => {
     .catch((err) => {
       console.log(err);
     });
-  console.log(`${baseUrl()}${id}&key=${key()}&${params()}`);
 
   dispatch({
     type: "FETCH_FILM",
     payload: {
-      stats: [
-        filmData.data.items[0],
-        new Date().toLocaleDateString(),
-        uuidv4(),
-      ],
+      stats: [filmData.data.items[0], new Date().toLocaleString(), uuidv4()],
     },
   });
   // function removeFilms() {
