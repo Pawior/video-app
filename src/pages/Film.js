@@ -19,13 +19,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import "../styles/_modal.scss";
-
+import breakpoint from "../components/StyledComponentsBreakpoint";
 const Film = ({ info, id }) => {
-  // useEffect(() => {
-  //   console.log(info);
-  //   console.log(id);
-  //   console.log(info[0]);
-  // }, []);
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -35,7 +30,6 @@ const Film = ({ info, id }) => {
   const dispatch = useDispatch();
   const deleteHandler = () => {
     dispatch(deleteItem(id));
-    console.log(id);
   };
   return (
     <StyledFilm>
@@ -132,6 +126,9 @@ const StyledFilm = styled.div`
   h1 {
     margin: 1rem 0rem 0.5rem 0rem !important;
     width: 75%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 80vw;
   }
 `;
 const Thumbnail = styled.img`

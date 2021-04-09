@@ -14,7 +14,7 @@ import Paginationed from "../components/Pagination";
 import Pagination from "react-bootstrap/Pagination";
 import Form from "react-bootstrap/Form";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import breakpoint from "./StyledComponentsBreakpoint";
 export const FilmLinker = ({
   filmList,
   setFilmList,
@@ -37,6 +37,7 @@ export const FilmLinker = ({
     const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
     console.log("wykonuje");
   }, [statsChanged]);
+  // Pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
@@ -44,12 +45,14 @@ export const FilmLinker = ({
   const loadFilmHandler = (id) => {
     dispatch(loadFilms(id));
   };
+  // Check that link is correct
   const checkLink = (inputedLink) => {
     inputedLink = inputedLink.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
     return inputedLink[2] !== undefined
       ? inputedLink[2].split(/[^0-9a-z_\-]/i)[0]
       : inputedLink[0];
   };
+  // Adding film
   const addFilm = (e) => {
     e.preventDefault();
     const pole = document.querySelector(".link");
@@ -65,7 +68,7 @@ export const FilmLinker = ({
       inputRef.current.value = "";
     }
   };
-
+  // Sort
   const sortAlphabetically = (e) => {
     e.preventDefault();
     var datauska = new Date().toLocaleString();
@@ -89,12 +92,12 @@ export const FilmLinker = ({
         stats.sort((a, b) => Date.parse(b[1]) - Date.parse(a[1]));
         break;
     }
-
+    // Additional state to fire useEffect
     setStatsChanged(() => {
       return !statsChanged;
     });
   };
-
+  // Clear list
   const clearFilmList = (e) => {
     e.preventDefault();
     dispatch(clearFilms());
@@ -144,14 +147,6 @@ export const FilmLinker = ({
         posts={currentPosts}
         setCurrentPage={setCurrentPage}
       />
-      {/* <List>
-        {stats &&
-          stats.map((stat) => (
-            <Film info={stat} id={stat.etag}>
-              {" "}
-            </Film>
-          ))}
-      </List> */}
       <Footer> </Footer>
     </MainForm>
   );
@@ -182,5 +177,6 @@ const SearchBar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 `;
 export default FilmLinker;

@@ -4,7 +4,6 @@ import "../styles/_home.scss";
 import styled from "styled-components";
 import urlTest from "../api";
 import axios from "axios";
-// AIzaSyAdtBEaPxvB3RhY9X46ONNRdgs2n4E9roA
 
 const Home = () => {
   const [filmList, setFilmList] = useState([]);
