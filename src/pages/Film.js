@@ -76,7 +76,14 @@ const Film = ({ info, id }) => {
         </p>
       </Stats>
       {info[0] && (
-        <Thumbnail src={info[0].snippet.thumbnails.high.url} alt="thumbnail" />
+        <Thumbnail
+          src={
+            info[0].snippet.thumbnails.maxres.url == undefined
+              ? info[0].snippet.thumbnails.high.url
+              : info[0].snippet.thumbnails.maxres.url
+          }
+          alt="thumbnail"
+        />
       )}
       <Play>
         {" "}

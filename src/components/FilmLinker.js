@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import urlTest from "../api";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +9,11 @@ import { clearFilms } from "../actions/filmsClear";
 import Film from "../pages/Film";
 import Posts from "../pages/Posts";
 import PageItem from "react-bootstrap/PageItem";
+import Button from "react-bootstrap/Button";
 import Paginationed from "../components/Pagination";
 import Pagination from "react-bootstrap/Pagination";
 import Form from "react-bootstrap/Form";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const FilmLinker = ({
   filmList,
@@ -106,11 +109,17 @@ export const FilmLinker = ({
     <MainForm>
       <Label>
         <h3> Podaj link lub id filmu: </h3>
-        <input ref={inputRef} className="link" type="text" />{" "}
+        <SearchBar>
+          {" "}
+          <input ref={inputRef} className="link" type="text" />{" "}
+          <button onClick={addFilm} className="roundedSearch">
+            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+          </button>
+        </SearchBar>
       </Label>
-      <input type="submit" onClick={addFilm} />
-      <input type="submit" value="clear" onClick={clearFilmList} />
-
+      <Button variant="outline-danger" onClick={clearFilmList}>
+        Wyczyść listę
+      </Button>{" "}
       <Form>
         <Form.Group controlId="exampleForm.SelectCustom">
           <Form.Label>Sortuj</Form.Label>
@@ -169,5 +178,9 @@ const List = styled.div`
 const Footer = styled.div`
   min-height: 10vh;
 `;
-
+const SearchBar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export default FilmLinker;
