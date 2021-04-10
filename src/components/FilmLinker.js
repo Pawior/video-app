@@ -106,6 +106,7 @@ export const FilmLinker = ({
   };
   const importExampleDataHandler = (e) => {
     localStorage.setItem("state", DataExported().state);
+    window.location.reload();
   };
   // Make paginate
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -122,7 +123,11 @@ export const FilmLinker = ({
               <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
             </button>
           </SearchBar>
-          <Button variant="outline-info" onClick={importExampleDataHandler}>
+          <Button
+            type="button"
+            variant="outline-info"
+            onClick={importExampleDataHandler}
+          >
             {" "}
             Import przykładowych danych
           </Button>
