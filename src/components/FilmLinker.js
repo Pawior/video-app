@@ -15,6 +15,7 @@ import Pagination from "react-bootstrap/Pagination";
 import Form from "react-bootstrap/Form";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import breakpoint from "./StyledComponentsBreakpoint";
+import DataExported from "./DataExported";
 export const FilmLinker = ({
   filmList,
   setFilmList,
@@ -35,7 +36,6 @@ export const FilmLinker = ({
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
-    console.log("wykonuje");
   }, [statsChanged]);
   // Pagination
   const indexOfLastPost = currentPage * postsPerPage;
@@ -55,13 +55,13 @@ export const FilmLinker = ({
   // Adding film
   const addFilm = (e) => {
     e.preventDefault();
-    const pole = document.querySelector(".link");
+    const inputValue = document.querySelector(".link");
     console.log(
       stats
         .slice()
         .sort((a, b) => a[0].snippet.title.localeCompare(b[0].snippet.title))
     );
-    if (pole.value != "") {
+    if (inputValue.value != "") {
       checkLink(inputRef.current.value);
       loadFilmHandler(checkLink(inputRef.current.value));
       setFilmList((filmList) => [...filmList, inputRef.current.value]);
@@ -104,7 +104,9 @@ export const FilmLinker = ({
 
     localStorage.clear();
   };
-
+  const importExampleDataHandler = (e) => {
+    localStorage.setItem("state", DataExported().state);
+  };
   // Make paginate
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -112,30 +114,37 @@ export const FilmLinker = ({
     <MainForm>
       <Label>
         <h3> Podaj link lub id filmu: </h3>
-        <SearchBar>
-          {" "}
-          <input ref={inputRef} className="link" type="text" />{" "}
-          <button onClick={addFilm} className="roundedSearch">
-            <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-          </button>
-        </SearchBar>
+        <ClearAndImport>
+          <SearchBar>
+            {" "}
+            <input ref={inputRef} className="link" type="text" />{" "}
+            <button onClick={addFilm} className="roundedSearch">
+              <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+            </button>
+          </SearchBar>
+          <Button variant="outline-info" onClick={importExampleDataHandler}>
+            {" "}
+            Import przykładowych danych
+          </Button>
+          <Button variant="outline-danger" onClick={clearFilmList}>
+            Wyczyść listę
+          </Button>{" "}
+        </ClearAndImport>
       </Label>
-      <Button variant="outline-danger" onClick={clearFilmList}>
-        Wyczyść listę
-      </Button>{" "}
-      <Form>
-        <Form.Group controlId="exampleForm.SelectCustom">
-          <Form.Label>Sortuj</Form.Label>
-          <Form.Control as="select" custom onChange={sortAlphabetically}>
-            <option value="wybierz">Wybierz</option>
-            <option value="AZ">A - Z</option>
-            <option value="ZA">Z - A</option>
-            <option value="NewestOldest"> Od najnowszych</option>
-            <option value="OldestNewest"> Od najstarszych</option>
-          </Form.Control>
-        </Form.Group>
-      </Form>
+
       <List>
+        <Form>
+          <Form.Group controlId="exampleForm.SelectCustom">
+            <Form.Label>Sortuj</Form.Label>
+            <Form.Control as="select" custom onChange={sortAlphabetically}>
+              <option value="wybierz">Wybierz</option>
+              <option value="AZ">A - Z</option>
+              <option value="ZA">Z - A</option>
+              <option value="NewestOldest"> Od najnowszych</option>
+              <option value="OldestNewest"> Od najstarszych</option>
+            </Form.Control>
+          </Form.Group>
+        </Form>
         <Posts posts={currentPosts}> </Posts>
       </List>
       <Paginationed
@@ -157,6 +166,9 @@ const MainForm = styled.form`
   align-items: flex-start;
   align-items: center;
   gap: 10px;
+  Form {
+    align-self: flex-end;
+  }
 `;
 const Label = styled.label`
   width: 100%;
@@ -165,7 +177,7 @@ const Label = styled.label`
   align-items: center;
 `;
 const List = styled.div`
-  margin-top: 10vh;
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -178,5 +190,14 @@ const SearchBar = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
+`;
+const ClearAndImport = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  Button {
+    align-self: flex-start;
+    margin: 5px 0px;
+  }
 `;
 export default FilmLinker;

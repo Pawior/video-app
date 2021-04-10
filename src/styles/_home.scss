@@ -20,6 +20,11 @@ input[type="text"]::-moz-focus-inner {
   background-color: white;
   border: 1px solid black;
   border-radius: 38px;
+  &:hover {
+    color: white;
+    background-color: black;
+    transition: 0.15s all ease-in-out;
+  }
 }
 .video-responsive {
   position: relative;
