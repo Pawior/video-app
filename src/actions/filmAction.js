@@ -13,7 +13,12 @@ export const loadFilms = (id) => async (dispatch) => {
   dispatch({
     type: "FETCH_FILM",
     payload: {
-      stats: [filmData.data.items[0], new Date().toLocaleString(), uuidv4()],
+      stats: [
+        filmData.data.items[0],
+        new Date().toLocaleString(),
+        uuidv4(),
+        false,
+      ],
     },
   });
 };

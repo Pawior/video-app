@@ -123,11 +123,7 @@ export const FilmLinker = ({
               <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
             </button>
           </SearchBar>
-          <Button
-            type="button"
-            variant="outline-info"
-            onClick={importExampleDataHandler}
-          >
+          <Button variant="outline-info" onClick={importExampleDataHandler}>
             {" "}
             Import przykładowych danych
           </Button>

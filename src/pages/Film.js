@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addFavourite } from "../actions/filmFavourite";
 import {
   faThumbsUp,
   faEye,
@@ -24,12 +25,19 @@ const Film = ({ info, id }) => {
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
+  const { stats } = useSelector((state) => state.film);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
   const deleteHandler = () => {
     dispatch(deleteItem(id));
+  };
+  const addFavouriteHandler = () => {
+    const index = stats.indexOf(info);
+    console.log(index);
+    dispatch(addFavourite(index));
   };
   return (
     <StyledFilm>
@@ -52,7 +60,10 @@ const Film = ({ info, id }) => {
           icon={star ? faStar : farFaStar}
           size="2x"
           color="#F5E351"
-          onClick={() => setStar(!star)}
+          onClick={() => {
+            setStar(!star);
+            addFavouriteHandler();
+          }}
         >
           {" "}
         </FontAwesomeIcon>{" "}
@@ -77,20 +88,12 @@ const Film = ({ info, id }) => {
               : info[0].snippet.thumbnails.maxres.url
           }
           alt="thumbnail"
+          onClick={handleShow}
         />
       )}
-      <Play>
-        {" "}
-        <FontAwesomeIcon
-          icon={faPlayCircle}
-          size="6x"
-          color="#F55338"
-          onClick={handleShow}
-        ></FontAwesomeIcon>
-      </Play>
+
       <Modal
         show={show}
-        // contentClassName="custom-modal-style"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         dialogClassName="custom-dialog"
@@ -120,7 +123,6 @@ const StyledFilm = styled.div`
   height: 60vh;
   width: 60vw;
   border-radius: 3%;
-  cursor: pointer;
   overflow: hidden;
   position: relative;
   h1 {
@@ -138,6 +140,7 @@ const Thumbnail = styled.img`
   justify-self: flex-end;
   object-fit: cover;
   margin-top: auto;
+  cursor: pointer;
 `;
 const Image = styled.div`
   align-self: flex-end;

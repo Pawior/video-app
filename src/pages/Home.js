@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <Main>
-      <h1> Hej! Tutaj możesz zapisać swoje ulubione filmy</h1>
+      <h1> Tutaj możesz zapisać swoje ulubione filmy</h1>
       <FilmLinker
         filmList={filmList}
         setFilmList={setFilmList}
@@ -40,3 +40,4 @@ const MainForm = styled.form`
 `;
 
 export default Home;
+
