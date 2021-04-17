@@ -16,6 +16,7 @@ import Form from "react-bootstrap/Form";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import breakpoint from "./StyledComponentsBreakpoint";
 import DataExported from "./DataExported";
+import { filterFilm } from "../actions/filmFilter";
 export const FilmLinker = ({
   filmList,
   setFilmList,
@@ -23,9 +24,23 @@ export const FilmLinker = ({
   setFilmStats,
 }) => {
   const dispatch = useDispatch();
-  const { stats } = useSelector((state) => state.film);
   const [statsChanged, setStatsChanged] = useState(false);
+  const [filterState, setFilterState] = useState(false);
   const inputRef = useRef(null);
+
+  let { stats } = useSelector((state) => {
+    if (filterState == false) {
+      return state.film;
+    } else if (filterState == true) {
+      const stats = state.film.stats.filter(
+        (item) => item[3].favourite != false
+      );
+      console.log(state.film);
+      console.log(stats);
+      console.log({ stats });
+      return { stats };
+    }
+  });
   // Pagination
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -73,7 +88,7 @@ export const FilmLinker = ({
     e.preventDefault();
     var datauska = new Date().toLocaleString();
     console.log(datauska.slice(0, datauska.lastIndexOf(",")));
-
+    console.log(stats);
     switch (e.target.value) {
       case "AZ":
         stats.sort((a, b) =>
@@ -86,13 +101,49 @@ export const FilmLinker = ({
         );
         break;
       case "NewestOldest":
-        stats.sort((a, b) => Date.parse(a[1]) - Date.parse(b[1]));
-        break;
-      case "OldestNewest":
         stats.sort((a, b) => Date.parse(b[1]) - Date.parse(a[1]));
         break;
+      case "OldestNewest":
+        stats.sort((a, b) => Date.parse(a[1]) - Date.parse(b[1]));
+        break;
     }
+
     // Additional state to fire useEffect
+    setStatsChanged(() => {
+      return !statsChanged;
+    });
+  };
+  // Filter
+  const filterHandler = (e) => {
+    // switch (e.target.value) {
+    //   case "Ulubione":
+    //     dispatch(filterFilm("filter"));
+    //     break;
+    //   case "NieFiltruj":
+    //     dispatch(filterFilm("noFilter"));
+    //     break;
+    //   default:
+    //     break;
+    // }
+    console.log("ds");
+    switch (e.target.value) {
+      case "Ulubione":
+        setFilterState(true);
+        // const newState = stats.filter((item) => item[3].favourite != false);
+        // console.log(stats);
+        // stats = newState;
+        // console.log(stats);
+        break;
+      case "NieFiltruj":
+        setFilterState(false);
+        break;
+      default:
+        break;
+    }
+    console.log(stats);
+
+    // console.log(stats);
+    // dispatch(filmFilter(info[3].favourite));
     setStatsChanged(() => {
       return !statsChanged;
     });
@@ -134,18 +185,29 @@ export const FilmLinker = ({
       </Label>
 
       <List>
-        <Form>
-          <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Label>Sortuj</Form.Label>
-            <Form.Control as="select" custom onChange={sortAlphabetically}>
-              <option value="wybierz">Wybierz</option>
-              <option value="AZ">A - Z</option>
-              <option value="ZA">Z - A</option>
-              <option value="NewestOldest"> Od najnowszych</option>
-              <option value="OldestNewest"> Od najstarszych</option>
-            </Form.Control>
-          </Form.Group>
-        </Form>
+        <SortFilter>
+          <Form>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Sortuj</Form.Label>
+              <Form.Control as="select" custom onChange={sortAlphabetically}>
+                <option value="wybierz">Wybierz</option>
+                <option value="AZ">A - Z</option>
+                <option value="ZA">Z - A</option>
+                <option value="NewestOldest"> Od najnowszych</option>
+                <option value="OldestNewest"> Od najstarszych</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <Form>
+            <Form.Group controlId="exampleForm.SelectCustom">
+              <Form.Label>Filtruj</Form.Label>
+              <Form.Control as="select" custom onChange={filterHandler}>
+                <option value="NieFiltruj">Wybierz</option>
+                <option value="Ulubione">Ulubione</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </SortFilter>
         <Posts posts={currentPosts}> </Posts>
       </List>
       <Paginationed
@@ -200,5 +262,11 @@ const ClearAndImport = styled.div`
     align-self: flex-start;
     margin: 5px 0px;
   }
+`;
+const SortFilter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
 `;
 export default FilmLinker;

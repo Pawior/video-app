@@ -25,6 +25,18 @@ const Film = ({ info, id }) => {
   const [star, setStar] = useState(false);
   const [show, setShow] = useState(false);
 
+  const correctDate = () => {
+    const formatedDate = info[1].toLocaleString();
+    if (formatedDate.includes(",")) {
+      let d, d1, m;
+      var readyDate = formatedDate.replace(/\./g, "-");
+      readyDate = readyDate.slice(0, readyDate.indexOf(","));
+      [d, d1, m] = readyDate.split("-");
+      const dateStr = [m, d1, d].join("-");
+      return dateStr;
+    }
+    return formatedDate.slice(0, formatedDate.indexOf("T"));
+  };
   const { stats } = useSelector((state) => state.film);
 
   const handleClose = () => setShow(false);
@@ -38,11 +50,12 @@ const Film = ({ info, id }) => {
     const index = stats.indexOf(info);
     console.log(index);
     dispatch(addFavourite(index));
+    console.log(info);
   };
   return (
     <StyledFilm>
       <h1> {info[0].snippet.title} </h1>
-      <h4> {info[1].slice(0, info[1].lastIndexOf(","))}</h4>
+      <h4>{correctDate()} </h4>
       <Trash>
         {" "}
         <FontAwesomeIcon
@@ -57,7 +70,7 @@ const Film = ({ info, id }) => {
       <Star>
         {" "}
         <FontAwesomeIcon
-          icon={star ? faStar : farFaStar}
+          icon={info[3].favourite ? faStar : farFaStar}
           size="2x"
           color="#F5E351"
           onClick={() => {
@@ -83,7 +96,7 @@ const Film = ({ info, id }) => {
       {info[0] && (
         <Thumbnail
           src={
-            info[0].snippet.thumbnails.maxres.url == undefined
+            info[0].snippet.thumbnails.maxres == undefined
               ? info[0].snippet.thumbnails.high.url
               : info[0].snippet.thumbnails.maxres.url
           }

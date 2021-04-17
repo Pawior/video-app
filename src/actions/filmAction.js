@@ -15,9 +15,9 @@ export const loadFilms = (id) => async (dispatch) => {
     payload: {
       stats: [
         filmData.data.items[0],
-        new Date().toLocaleString(),
+        new Date(),
         uuidv4(),
-        false,
+        { favourite: false },
       ],
     },
   });

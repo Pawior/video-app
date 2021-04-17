@@ -20,26 +20,38 @@ const filmReducer = (state = initState, action) => {
     }
     case "ADD_FAVOURITE": {
       console.log(action.payload);
+      const current = [...state.stats];
+      current[action.payload][3].favourite = !current[action.payload][3]
+        .favourite;
       return {
         ...state,
-        stats: state.stats.map((item, index) => {
-          console.log("jestem prawie fajny");
-          console.log(action.payload);
-          if (index === action.payload) {
-            console.log("jestem fajn y");
-            item.map((itemek, indexik) => {
-              console.log("jestem bardzo fajn y");
-              if (indexik === 3) {
-                return itemek;
-              } else {
-                return itemek;
-              }
-              // return indexik === 3 ? itemek : itemek;
-            });
-          } else {
-            return item;
-          }
-        }),
+        stats: [...current],
+      };
+    }
+    case "FILTER_FILM": {
+      const newState = [...state.stats];
+      const stateCopy = [];
+      console.log(action.payload);
+      if (action.payload == "filter") {
+        let statsCopy = [...state.stats];
+        console.log(newState[1][3].favourite);
+        const stateCopy = newState.filter((item) => item[3].favourite != false);
+        console.log(stateCopy);
+        return {
+          ...state,
+          stats: [...stateCopy],
+        };
+      } else if ((action.payload = "noFilter")) {
+        let statsCopy = [...state.stats];
+        return {
+          ...state,
+          stats: [...statsCopy],
+        };
+      }
+      console.log(stateCopy);
+      return {
+        ...state,
+        stats: [...stateCopy],
       };
     }
     default:
