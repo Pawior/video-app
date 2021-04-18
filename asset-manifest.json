@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/video-app/static/css/main.9345ba2f.chunk.css",
+    "main.js": "/video-app/static/js/main.9119dd7e.chunk.js",
+    "main.js.map": "/video-app/static/js/main.9119dd7e.chunk.js.map",
+    "runtime-main.js": "/video-app/static/js/runtime-main.dcfbf6f4.js",
+    "runtime-main.js.map": "/video-app/static/js/runtime-main.dcfbf6f4.js.map",
+    "static/js/2.2857d15f.chunk.js": "/video-app/static/js/2.2857d15f.chunk.js",
+    "static/js/2.2857d15f.chunk.js.map": "/video-app/static/js/2.2857d15f.chunk.js.map",
+    "static/js/3.39354dd3.chunk.js": "/video-app/static/js/3.39354dd3.chunk.js",
+    "static/js/3.39354dd3.chunk.js.map": "/video-app/static/js/3.39354dd3.chunk.js.map",
+    "index.html": "/video-app/index.html",
+    "static/css/main.9345ba2f.chunk.css.map": "/video-app/static/css/main.9345ba2f.chunk.css.map",
+    "static/js/2.2857d15f.chunk.js.LICENSE.txt": "/video-app/static/js/2.2857d15f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dcfbf6f4.js",
+    "static/js/2.2857d15f.chunk.js",
+    "static/css/main.9345ba2f.chunk.css",
+    "static/js/main.9119dd7e.chunk.js"
+  ]
+}
