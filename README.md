@@ -5,14 +5,14 @@ Easy and fast to use webiste which allow users to store their youtube films. Use
 ## Table of contents
 * [Features](#features)
 * [Preview](#preview)
-* [Languages & tools](#languages & tools)
+* [Languages & tools](#languages&tools)
 * [Sources](#sources)
 * [Contributing] (#contributing)
 * [License] (#license)
 
 ## Features
 * App show film statistics - views, like, title, thumbnail.
-* Local Storage ( data are stored even after closing the page)
+* Local Storage ( data are stored even after closing the page )
 * Add film to favourite list and filtering by favourite
 * Sorting by newest/oldest/alphabetically
 * Hardocoded data if you'd like to test app
