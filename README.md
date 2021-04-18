@@ -5,8 +5,7 @@ Easy and fast to use webiste which allow users to store their youtube films. Use
 ## Table of contents
 * [Features](#features)
 * [Preview](#preview)
-* [Languages & tools](#languages&tools)
-* [Sources](#sources)
+* [Languages](#languages)
 * [Contributing] (#contributing)
 * [License] (#license)
 
@@ -23,7 +22,7 @@ Easy and fast to use webiste which allow users to store their youtube films. Use
 ![preview1](./public/preview.png)
 ![preview2](./public/preview2.png)
 
-## Languages & tools
+## Languages
 Project is created with:
 
 ### React
