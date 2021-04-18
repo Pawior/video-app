@@ -2,24 +2,12 @@ import React, { useState } from "react";
 import FilmLinker from "../components/FilmLinker";
 import "../styles/_home.scss";
 import styled from "styled-components";
-import urlTest from "../api";
-import axios from "axios";
 
 const Home = () => {
-  const [filmList, setFilmList] = useState([]);
-  const [filmStats, setFilmStats] = useState([]);
-
   return (
     <Main>
       <h1> Tutaj możesz zapisać swoje ulubione filmy</h1>
-      <FilmLinker
-        filmList={filmList}
-        setFilmList={setFilmList}
-        filmStats={filmStats}
-        setFilmList={setFilmList}
-      >
-        {" "}
-      </FilmLinker>
+      <FilmLinker> </FilmLinker>
     </Main>
   );
 };
@@ -32,12 +20,4 @@ const Main = styled.div`
   }
 `;
 
-const MainForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-`;
-
 export default Home;
-

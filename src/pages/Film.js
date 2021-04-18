@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addFavourite } from "../actions/filmFavourite";
@@ -9,12 +9,9 @@ import {
   faTrashAlt,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faStar as farFaStar,
-  faPlayCircle,
-} from "@fortawesome/free-regular-svg-icons";
+import { faStar as farFaStar } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { loadFilms } from "../actions/filmAction";
+
 import { deleteItem } from "../actions/filmDelete";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -48,13 +45,11 @@ const Film = ({ info, id }) => {
   };
   const addFavouriteHandler = () => {
     const index = stats.indexOf(info);
-    console.log(index);
     dispatch(addFavourite(index));
-    console.log(info);
   };
   return (
     <StyledFilm>
-      <h1> {info[0].snippet.title} </h1>
+      <h1> {info[0] && info[0].snippet.title} </h1>
       <h4>{correctDate()} </h4>
       <Trash>
         {" "}
@@ -70,7 +65,7 @@ const Film = ({ info, id }) => {
       <Star>
         {" "}
         <FontAwesomeIcon
-          icon={info[3].favourite ? faStar : farFaStar}
+          icon={info[3] && info[3].favourite ? faStar : farFaStar}
           size="2x"
           color="#F5E351"
           onClick={() => {
@@ -85,18 +80,18 @@ const Film = ({ info, id }) => {
         <p>
           {" "}
           <FontAwesomeIcon icon={faEye}> </FontAwesomeIcon>{" "}
-          {info[0].statistics.viewCount}{" "}
+          {info[0] && info[0].statistics.viewCount}{" "}
         </p>
         <p>
           {" "}
           <FontAwesomeIcon icon={faThumbsUp}> </FontAwesomeIcon>{" "}
-          {info[0].statistics.likeCount}
+          {info[0] && info[0].statistics.likeCount}
         </p>
       </Stats>
       {info[0] && (
         <Thumbnail
           src={
-            info[0].snippet.thumbnails.maxres == undefined
+            info[0] && info[0].snippet.thumbnails.maxres === undefined
               ? info[0].snippet.thumbnails.high.url
               : info[0].snippet.thumbnails.maxres.url
           }
@@ -112,14 +107,14 @@ const Film = ({ info, id }) => {
         dialogClassName="custom-dialog"
       >
         <Modal.Header closeButton>
-          <Modal.Title>{info[0].snippet.title}</Modal.Title>
+          <Modal.Title>{info[0] && info[0].snippet.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
-          <YoutubeEmbed embedId={info[0].id}> </YoutubeEmbed>{" "}
+          <YoutubeEmbed embedId={info[0] && info[0].id}> </YoutubeEmbed>{" "}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Zamknij
           </Button>
         </Modal.Footer>
       </Modal>
@@ -155,13 +150,6 @@ const Thumbnail = styled.img`
   margin-top: auto;
   cursor: pointer;
 `;
-const Image = styled.div`
-  align-self: flex-end;
-  justify-self: flex-end;
-  margin-top: auto;
-  width: 100%;
-  min-height: 60%;
-`;
 
 const Stats = styled.div`
   display: flex;
@@ -171,22 +159,13 @@ const Trash = styled.div`
   position: absolute;
   top: 5%;
   right: 5%;
+  cursor: pointer;
 `;
 const Star = styled.div`
   position: absolute;
   top: 5%;
   left: 5%;
+  cursor: pointer;
 `;
-const Play = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 18%;
-  opacity: 0.7;
-  transition: 0.5s ease all;
-  &:hover {
-    opacity: 1;
-  }
-`;
+
 export default Film;

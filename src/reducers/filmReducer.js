@@ -12,14 +12,13 @@ const filmReducer = (state = initState, action) => {
     case "REMOVE_FILM": {
       return {
         ...state,
-        stats: state.stats.filter((item, index) => item[2] != action.payload),
+        stats: state.stats.filter((item, index) => item[2] !== action.payload),
       };
     }
     case "CLEAR_FILMS": {
       return { stats: [] };
     }
     case "ADD_FAVOURITE": {
-      console.log(action.payload);
       const current = [...state.stats];
       current[action.payload][3].favourite = !current[action.payload][3]
         .favourite;
@@ -32,10 +31,11 @@ const filmReducer = (state = initState, action) => {
       const newState = [...state.stats];
       const stateCopy = [];
       console.log(action.payload);
-      if (action.payload == "filter") {
-        let statsCopy = [...state.stats];
+      if (action.payload === "filter") {
         console.log(newState[1][3].favourite);
-        const stateCopy = newState.filter((item) => item[3].favourite != false);
+        const stateCopy = newState.filter(
+          (item) => item[3].favourite !== false
+        );
         console.log(stateCopy);
         return {
           ...state,

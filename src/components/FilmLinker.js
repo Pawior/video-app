@@ -5,6 +5,7 @@ import urlTest from "../api";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFilms } from "../actions/filmAction";
+import { loadFilmsVimeo } from "../actions/filmActionVimeo";
 import { clearFilms } from "../actions/filmsClear";
 import Film from "../pages/Film";
 import Posts from "../pages/Posts";
@@ -17,12 +18,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import breakpoint from "./StyledComponentsBreakpoint";
 import DataExported from "./DataExported";
 import { filterFilm } from "../actions/filmFilter";
-export const FilmLinker = ({
-  filmList,
-  setFilmList,
-  filmStats,
-  setFilmStats,
-}) => {
+import getVideoId from "get-video-id";
+export const FilmLinker = () => {
   const dispatch = useDispatch();
   const [statsChanged, setStatsChanged] = useState(false);
   const [filterState, setFilterState] = useState(false);
@@ -35,9 +32,7 @@ export const FilmLinker = ({
       const stats = state.film.stats.filter(
         (item) => item[3].favourite != false
       );
-      console.log(state.film);
-      console.log(stats);
-      console.log({ stats });
+
       return { stats };
     }
   });
@@ -60,35 +55,40 @@ export const FilmLinker = ({
   const loadFilmHandler = (id) => {
     dispatch(loadFilms(id));
   };
+  const loadFilmHandlerVimeo = (id) => {
+    dispatch(loadFilmsVimeo(id));
+  };
   // Check that link is correct
   const checkLink = (inputedLink) => {
-    inputedLink = inputedLink.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-    return inputedLink[2] !== undefined
-      ? inputedLink[2].split(/[^0-9a-z_\-]/i)[0]
-      : inputedLink[0];
+    // For Youtube
+    // inputedLink = inputedLink.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    // return inputedLink[2] !== undefined
+    //   ? inputedLink[2].split(/[^0-9a-z_\-]/i)[0]
+    //   : inputedLink[0];
+
+    // Ready for Youtube and Vimeo links as well
+    const { id } = getVideoId(inputedLink);
+    return id;
   };
   // Adding film
   const addFilm = (e) => {
     e.preventDefault();
-    const inputValue = document.querySelector(".link");
-    console.log(
-      stats
-        .slice()
-        .sort((a, b) => a[0].snippet.title.localeCompare(b[0].snippet.title))
-    );
-    if (inputValue.value != "") {
-      checkLink(inputRef.current.value);
+    let isNum = /\d/.test(checkLink(inputRef.current.value));
+    if (inputRef.current.value.length > 8 && isNum) {
+      if (inputRef.current.value.includes("vimeo")) {
+        loadFilmHandlerVimeo(checkLink(inputRef.current.value));
+      } else checkLink(inputRef.current.value);
       loadFilmHandler(checkLink(inputRef.current.value));
-      setFilmList((filmList) => [...filmList, inputRef.current.value]);
       inputRef.current.value = "";
+    } else {
+      window.alert("Zły link lub błędne id filmu");
     }
   };
   // Sort
   const sortAlphabetically = (e) => {
     e.preventDefault();
     var datauska = new Date().toLocaleString();
-    console.log(datauska.slice(0, datauska.lastIndexOf(",")));
-    console.log(stats);
+
     switch (e.target.value) {
       case "AZ":
         stats.sort((a, b) =>
@@ -115,24 +115,9 @@ export const FilmLinker = ({
   };
   // Filter
   const filterHandler = (e) => {
-    // switch (e.target.value) {
-    //   case "Ulubione":
-    //     dispatch(filterFilm("filter"));
-    //     break;
-    //   case "NieFiltruj":
-    //     dispatch(filterFilm("noFilter"));
-    //     break;
-    //   default:
-    //     break;
-    // }
-    console.log("ds");
     switch (e.target.value) {
       case "Ulubione":
         setFilterState(true);
-        // const newState = stats.filter((item) => item[3].favourite != false);
-        // console.log(stats);
-        // stats = newState;
-        // console.log(stats);
         break;
       case "NieFiltruj":
         setFilterState(false);
@@ -140,10 +125,7 @@ export const FilmLinker = ({
       default:
         break;
     }
-    console.log(stats);
 
-    // console.log(stats);
-    // dispatch(filmFilter(info[3].favourite));
     setStatsChanged(() => {
       return !statsChanged;
     });
@@ -159,7 +141,7 @@ export const FilmLinker = ({
     localStorage.setItem("state", DataExported().state);
     window.location.reload();
   };
-  // Make paginate
+  // Make pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -185,29 +167,31 @@ export const FilmLinker = ({
       </Label>
 
       <List>
-        <SortFilter>
-          <Form>
-            <Form.Group controlId="exampleForm.SelectCustom">
-              <Form.Label>Sortuj</Form.Label>
-              <Form.Control as="select" custom onChange={sortAlphabetically}>
-                <option value="wybierz">Wybierz</option>
-                <option value="AZ">A - Z</option>
-                <option value="ZA">Z - A</option>
-                <option value="NewestOldest"> Od najnowszych</option>
-                <option value="OldestNewest"> Od najstarszych</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-          <Form>
-            <Form.Group controlId="exampleForm.SelectCustom">
-              <Form.Label>Filtruj</Form.Label>
-              <Form.Control as="select" custom onChange={filterHandler}>
-                <option value="NieFiltruj">Wybierz</option>
-                <option value="Ulubione">Ulubione</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-        </SortFilter>
+        {stats[0] && (
+          <SortFilter>
+            <Form>
+              <Form.Group controlId="exampleForm.SelectCustom">
+                <Form.Label>Sortuj</Form.Label>
+                <Form.Control as="select" custom onChange={sortAlphabetically}>
+                  <option value="wybierz">Wybierz</option>
+                  <option value="AZ">A - Z</option>
+                  <option value="ZA">Z - A</option>
+                  <option value="NewestOldest"> Od najnowszych</option>
+                  <option value="OldestNewest"> Od najstarszych</option>
+                </Form.Control>
+              </Form.Group>
+            </Form>
+            <Form>
+              <Form.Group controlId="exampleForm.SelectCustom">
+                <Form.Label>Filtruj</Form.Label>
+                <Form.Control as="select" custom onChange={filterHandler}>
+                  <option value="NieFiltruj">Brak filtrowania</option>
+                  <option value="Ulubione">Ulubione</option>
+                </Form.Control>
+              </Form.Group>
+            </Form>
+          </SortFilter>
+        )}
         <Posts posts={currentPosts}> </Posts>
       </List>
       <Paginationed
@@ -263,6 +247,7 @@ const ClearAndImport = styled.div`
     margin: 5px 0px;
   }
 `;
+// Sort and Filter container
 const SortFilter = styled.div`
   display: flex;
   flex-direction: row;
