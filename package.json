@@ -2,6 +2,7 @@
   "name": "video-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pawior.github.io/video-app",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",

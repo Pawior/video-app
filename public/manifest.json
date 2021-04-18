@@ -13,6 +13,11 @@
       "type": "image/x-icon"
     },
     {
+      "src": "videocamera_64.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
       "src": "videocamera_128.ico",
       "type": "image/x-icon",
       "sizes": "128x128"
