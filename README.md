@@ -6,8 +6,8 @@ Easy and fast to use webiste which allow users to store their youtube films. Use
 * [Features](#features)
 * [Preview](#preview)
 * [Languages](#languages)
-* [Contributing] (#contributing)
-* [License] (#license)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Features
 * App show film statistics - views, like, title, thumbnail.
