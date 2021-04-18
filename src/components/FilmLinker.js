@@ -1,24 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import urlTest from "../api";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFilms } from "../actions/filmAction";
 import { loadFilmsVimeo } from "../actions/filmActionVimeo";
 import { clearFilms } from "../actions/filmsClear";
-import Film from "../pages/Film";
 import Posts from "../pages/Posts";
-import PageItem from "react-bootstrap/PageItem";
 import Button from "react-bootstrap/Button";
 import Paginationed from "../components/Pagination";
-import Pagination from "react-bootstrap/Pagination";
 import Form from "react-bootstrap/Form";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import breakpoint from "./StyledComponentsBreakpoint";
 import DataExported from "./DataExported";
-import { filterFilm } from "../actions/filmFilter";
 import getVideoId from "get-video-id";
+import breakpoint from "./StyledComponentsBreakpoint";
 export const FilmLinker = () => {
   const dispatch = useDispatch();
   const [statsChanged, setStatsChanged] = useState(false);
@@ -26,31 +20,23 @@ export const FilmLinker = () => {
   const inputRef = useRef(null);
 
   let { stats } = useSelector((state) => {
-    if (filterState == false) {
+    if (filterState === false) {
       return state.film;
-    } else if (filterState == true) {
+    } else if (filterState === true) {
       const stats = state.film.stats.filter(
-        (item) => item[3].favourite != false
+        (item) => item[3].favourite !== false
       );
 
       return { stats };
     }
   });
   // Pagination
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
-  // Current posts
-  useEffect(() => {
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
-  }, [statsChanged]);
-  // Pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
+  let indexOfLastPost = currentPage * postsPerPage;
+  let indexOfFirstPost = indexOfLastPost - postsPerPage;
+  let currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
 
   const loadFilmHandler = (id) => {
     dispatch(loadFilms(id));
@@ -73,8 +59,8 @@ export const FilmLinker = () => {
   // Adding film
   const addFilm = (e) => {
     e.preventDefault();
-    let isNum = /\d/.test(checkLink(inputRef.current.value));
-    if (inputRef.current.value.length > 8 && isNum) {
+    // let isNum = /\d/.test(checkLink(inputRef.current.value));
+    if (inputRef.current.value.length > 8) {
       if (inputRef.current.value.includes("vimeo")) {
         loadFilmHandlerVimeo(checkLink(inputRef.current.value));
       } else checkLink(inputRef.current.value);
@@ -87,10 +73,10 @@ export const FilmLinker = () => {
   // Sort
   const sortAlphabetically = (e) => {
     e.preventDefault();
-    var datauska = new Date().toLocaleString();
-
+    console.log("sad");
     switch (e.target.value) {
       case "AZ":
+        console.log("sadd");
         stats.sort((a, b) =>
           a[0].snippet.title.localeCompare(b[0].snippet.title)
         );
@@ -105,6 +91,8 @@ export const FilmLinker = () => {
         break;
       case "OldestNewest":
         stats.sort((a, b) => Date.parse(a[1]) - Date.parse(b[1]));
+        break;
+      default:
         break;
     }
 
@@ -253,5 +241,11 @@ const SortFilter = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   gap: 10px;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    Form {
+      width: 10rem;
+    }
+  }
 `;
 export default FilmLinker;

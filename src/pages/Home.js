@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FilmLinker from "../components/FilmLinker";
 import "../styles/_home.scss";
 import styled from "styled-components";

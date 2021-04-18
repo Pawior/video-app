@@ -5,7 +5,7 @@ const Posts = ({ posts }) => {
     <>
       {posts[0] &&
         posts.map((post) => (
-          <Film info={post} id={post[2]}>
+          <Film info={post} id={post[2]} key={post[2]}>
             {" "}
           </Film>
         ))}
