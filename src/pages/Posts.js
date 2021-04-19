@@ -1,14 +1,21 @@
 import React from "react";
 import Film from "./Film";
-const Posts = ({ posts }) => {
+import FilmList from "./FilmList";
+const Posts = ({ posts, displayState }) => {
+  // if ( displayState )
   return (
     <>
-      {posts[0] &&
-        posts.map((post) => (
-          <Film info={post} id={post[2]} key={post[2]}>
-            {" "}
-          </Film>
-        ))}
+      {posts[0] && displayState
+        ? posts.map((post) => (
+            <Film info={post} id={post[2]} key={post[2]}>
+              {" "}
+            </Film>
+          ))
+        : posts.map((post) => (
+            <FilmList info={post} id={post[2]} key={post[2]}>
+              {" "}
+            </FilmList>
+          ))}
     </>
   );
 };

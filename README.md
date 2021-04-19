@@ -19,8 +19,8 @@ Easy and fast to use webiste which allow users to store their youtube films. Use
 * Support all youtube links type ( shorten, with channel name, etc. )
 
 ## Preview
-![preview1](./public/preview.png)
-![preview2](./public/preview2.png)
+![preview1](./public/preview1.png)
+![preview2](./public/preview11.png)
 
 ## Languages
 Project is created with:

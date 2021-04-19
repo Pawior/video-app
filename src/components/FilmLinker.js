@@ -18,7 +18,7 @@ export const FilmLinker = () => {
   const dispatch = useDispatch();
   const [statsChanged, setStatsChanged] = useState(false);
   const [filterState, setFilterState] = useState(false);
-  const [displayState, setDisplayState] = useState(false);
+  const [displayState, setDisplayState] = useState(true);
   const inputRef = useRef(null);
 
   let { stats } = useSelector((state) => {
@@ -35,7 +35,8 @@ export const FilmLinker = () => {
   // Pagination
   // const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(4);
+  const [postsPerPage, setPostsPerPage] = useState(4);
+
   let indexOfLastPost = currentPage * postsPerPage;
   let indexOfFirstPost = indexOfLastPost - postsPerPage;
   let currentPosts = stats.slice(indexOfFirstPost, indexOfLastPost);
@@ -133,8 +134,10 @@ export const FilmLinker = () => {
   };
   // Make pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const displayChangeHandler = () => {
     setDisplayState(() => !displayState);
+    displayState ? setPostsPerPage(8) : setPostsPerPage(4);
   };
   return (
     <MainForm>
@@ -212,7 +215,9 @@ export const FilmLinker = () => {
             </SortFilter>
           </SortFilterDisplay>
         )}
-        <Posts posts={currentPosts}> </Posts>
+        <Posts posts={currentPosts} displayState={displayState}>
+          {" "}
+        </Posts>
       </List>
       <Paginationed
         postsPerPage={postsPerPage}
@@ -277,6 +282,8 @@ const SortFilterDisplay = styled.div`
   }
 `;
 const SortFilter = styled.div`
+  transition: 1s all ease;
+
   display: flex;
   flex-direction: row;
   justify-self: flex-end;
@@ -294,19 +301,21 @@ const SortFilter = styled.div`
   }
 `;
 const DisplayPick = styled.div`
-  transition: 1s all ease;
+  cursor: pointer;
   .MdList {
-    transition: 0.5s all ease;
+    transition: 0.15s all ease;
     &:hover {
       color: black !important;
     }
   }
+
   .MdViewStream {
-    transition: 0.5s all ease;
+    transition: 0.15s all ease;
     &:hover {
       color: black !important;
     }
   }
+
   border: 1px solid #3b3d3d;
   height: 3.2rem;
   display: flex;
