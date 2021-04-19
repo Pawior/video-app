@@ -13,10 +13,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import DataExported from "./DataExported";
 import getVideoId from "get-video-id";
 import breakpoint from "./StyledComponentsBreakpoint";
+import { MdViewStream, MdList } from "react-icons/md";
 export const FilmLinker = () => {
   const dispatch = useDispatch();
   const [statsChanged, setStatsChanged] = useState(false);
   const [filterState, setFilterState] = useState(false);
+  const [displayState, setDisplayState] = useState(false);
   const inputRef = useRef(null);
 
   let { stats } = useSelector((state) => {
@@ -131,7 +133,9 @@ export const FilmLinker = () => {
   };
   // Make pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const displayChangeHandler = () => {
+    setDisplayState(() => !displayState);
+  };
   return (
     <MainForm>
       <Label>
@@ -156,29 +160,57 @@ export const FilmLinker = () => {
 
       <List>
         {stats[0] && (
-          <SortFilter>
-            <Form>
-              <Form.Group controlId="exampleForm.SelectCustom">
-                <Form.Label>Sortuj</Form.Label>
-                <Form.Control as="select" custom onChange={sortAlphabetically}>
-                  <option value="wybierz">Wybierz</option>
-                  <option value="AZ">A - Z</option>
-                  <option value="ZA">Z - A</option>
-                  <option value="NewestOldest"> Od najnowszych</option>
-                  <option value="OldestNewest"> Od najstarszych</option>
-                </Form.Control>
-              </Form.Group>
-            </Form>
-            <Form>
-              <Form.Group controlId="exampleForm.SelectCustom">
-                <Form.Label>Filtruj</Form.Label>
-                <Form.Control as="select" custom onChange={filterHandler}>
-                  <option value="NieFiltruj">Brak filtrowania</option>
-                  <option value="Ulubione">Ulubione</option>
-                </Form.Control>
-              </Form.Group>
-            </Form>
-          </SortFilter>
+          <SortFilterDisplay>
+            <DisplayPick>
+              {" "}
+              {displayState ? (
+                <MdList
+                  size="3rem"
+                  color="#3b3d3d"
+                  onClick={displayChangeHandler}
+                  className="MdList"
+                >
+                  {" "}
+                </MdList>
+              ) : (
+                <MdViewStream
+                  size="3rem"
+                  color="#3b3d3d"
+                  onClick={displayChangeHandler}
+                  className="MdViewStream"
+                >
+                  {" "}
+                </MdViewStream>
+              )}
+            </DisplayPick>
+            <SortFilter>
+              <Form>
+                <Form.Group controlId="exampleForm.SelectCustom">
+                  <Form.Label>Sortuj</Form.Label>
+                  <Form.Control
+                    as="select"
+                    custom
+                    onChange={sortAlphabetically}
+                  >
+                    <option value="wybierz">Wybierz</option>
+                    <option value="AZ">A - Z</option>
+                    <option value="ZA">Z - A</option>
+                    <option value="NewestOldest"> Od najnowszych</option>
+                    <option value="OldestNewest"> Od najstarszych</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+              <Form>
+                <Form.Group controlId="exampleForm.SelectCustom">
+                  <Form.Label>Filtruj</Form.Label>
+                  <Form.Control as="select" custom onChange={filterHandler}>
+                    <option value="NieFiltruj">Brak filtrowania</option>
+                    <option value="Ulubione">Ulubione</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+            </SortFilter>
+          </SortFilterDisplay>
         )}
         <Posts posts={currentPosts}> </Posts>
       </List>
@@ -236,16 +268,58 @@ const ClearAndImport = styled.div`
   }
 `;
 // Sort and Filter container
+const SortFilterDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+  }
+`;
 const SortFilter = styled.div`
   display: flex;
   flex-direction: row;
+  justify-self: flex-end;
   justify-content: flex-end;
+  align-items: flex-end;
   gap: 10px;
   @media only screen and ${breakpoint.device.xs} {
     flex-direction: column;
     Form {
       width: 10rem;
+      div {
+        margin: 0;
+      }
     }
+  }
+`;
+const DisplayPick = styled.div`
+  transition: 1s all ease;
+  .MdList {
+    transition: 0.5s all ease;
+    &:hover {
+      color: black !important;
+    }
+  }
+  .MdViewStream {
+    transition: 0.5s all ease;
+    &:hover {
+      color: black !important;
+    }
+  }
+  border: 1px solid #3b3d3d;
+  height: 3.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: center;
+  gap: 0px;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-direction: column;
+    align-self: flex-end;
+    justify-self: end;
   }
 `;
 export default FilmLinker;
