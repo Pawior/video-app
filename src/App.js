@@ -1,12 +1,22 @@
 import Home from "./pages/Home";
+import Title from "./pages/Title";
 import "./styles/App.scss";
 import React from "react";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <Home> </Home>
-    </div>
+    <Router>
+      <div className="App"></div>
+
+      <Switch>
+        <Route exact path="/">
+          <Title />
+        </Route>
+        <Route path="/Library">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
