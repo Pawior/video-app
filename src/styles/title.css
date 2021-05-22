@@ -67,3 +67,8 @@
 .waveAnimation .waveBottom {
   animation: move_wave 15s linear infinite;
 }
+.BtnLibrary {
+  align-self: center !important;
+  justify-self: center;
+  padding: 100px;
+}

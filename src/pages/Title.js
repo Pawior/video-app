@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import image from "../images/Vector.png";
 import Button from "react-bootstrap/Button";
+import breakpoint from "../components/StyledComponentsBreakpoint";
 
 const TitlePage = () => {
   return (
@@ -70,6 +71,9 @@ const Page = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  @media only screen and ${breakpoint.device.sm} {
+    flex-wrap: wrap;
+  }
   p {
     opacity: 1 !important;
     color: #fff;
@@ -78,11 +82,18 @@ const Page = styled.div`
   }
 `;
 const Info = styled.div`
+  margin-left: 2rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   flex-direction: column;
-  Button {
-    align-self: center;
+  @media only screen and ${breakpoint.device.sm} {
+    margin-right: 2rem;
+  }
+  button {
+    @media only screen and ${breakpoint.device.sm} {
+      margin-top: 2rem;
+    }
   }
 `;
 

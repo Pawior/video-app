@@ -136,6 +136,10 @@ const StyledFilm = styled.div`
   h1 {
     margin: 1rem 0rem 0.5rem 0rem !important;
     width: 75%;
+
+    @media only screen and ${breakpoint.device.sm} {
+      font-size: 1.5rem;
+    }
   }
   @media only screen and ${breakpoint.device.lg} {
     width: 80vw;
