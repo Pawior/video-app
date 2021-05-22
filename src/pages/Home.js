@@ -6,7 +6,7 @@ import styled from "styled-components";
 const Home = () => {
   return (
     <Main>
-      <h1> Tutaj możesz zapisać swoje ulubione filmy</h1>
+      <h1> Your video library!</h1>
       <FilmLinker> </FilmLinker>
     </Main>
   );
