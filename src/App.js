@@ -9,7 +9,7 @@ function App() {
       <div className="App"></div>
 
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/video-app">
           <Title />
         </Route>
         <Route path="/Library">
