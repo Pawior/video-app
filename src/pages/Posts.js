@@ -2,7 +2,6 @@ import React from "react";
 import Film from "./Film";
 import FilmList from "./FilmList";
 const Posts = ({ posts, displayState }) => {
-  // if ( displayState )
   return (
     <>
       {posts[0] && displayState

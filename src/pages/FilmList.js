@@ -39,7 +39,6 @@ const FilmList = ({ info, id }) => {
   const handleClose = () => {
     setShow(() => !show);
     setIframe(false);
-    console.log("ds");
   };
   const handleShow = () => setIframe(() => !iframe);
 
