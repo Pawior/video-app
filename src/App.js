@@ -2,17 +2,17 @@ import Home from "./pages/Home";
 import Title from "./pages/Title";
 import "./styles/App.scss";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <div className="App"></div>
 
       <Switch>
-        <Route exact path="/video-app">
+        <Route exact path="/">
           <Title />
         </Route>
-        <Route path="/video-app/library">
+        <Route path="/library">
           <Home />
         </Route>
       </Switch>

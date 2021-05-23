@@ -1,7 +1,7 @@
 import React from "react";
 import Home from "./Home";
 import "../styles/title.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import image from "../images/Vector.png";
 import Button from "react-bootstrap/Button";
@@ -15,7 +15,7 @@ const TitlePage = () => {
           <Info>
             {" "}
             <p> Your favourite videos all in one place!</p>
-            <Link to="/video-app/library">
+            <Link to="/library">
               <Button id="BtnLibrary" variant="outline-light" size="lg">
                 Go to library!
               </Button>
@@ -50,7 +50,7 @@ const TitlePage = () => {
         </div>
       </div>
       <Switch>
-        <Route path="/video-app/library">
+        <Route path="/library">
           <Home />
         </Route>
       </Switch>
