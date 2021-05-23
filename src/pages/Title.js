@@ -10,17 +10,12 @@ import breakpoint from "../components/StyledComponentsBreakpoint";
 const TitlePage = () => {
   return (
     <>
-      <div class="Title"> Hi</div>
-      <button>
-        {" "}
-        <Link to="/Library"> Go to Library </Link>
-      </button>
       <div class="waveWrapper waveAnimation">
         <Page>
           <Info>
             {" "}
             <p> Your favourite videos all in one place!</p>
-            <Link to="/Library">
+            <Link to="/video-app/library">
               <Button id="BtnLibrary" variant="outline-light" size="lg">
                 Go to library!
               </Button>
@@ -55,7 +50,7 @@ const TitlePage = () => {
         </div>
       </div>
       <Switch>
-        <Route path="/Library">
+        <Route path="/video-app/library">
           <Home />
         </Route>
       </Switch>

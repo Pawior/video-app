@@ -12,7 +12,7 @@ function App() {
         <Route exact path="/video-app">
           <Title />
         </Route>
-        <Route path="/Library">
+        <Route path="/video-app/library">
           <Home />
         </Route>
       </Switch>
