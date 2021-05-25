@@ -1,6 +1,6 @@
 # Video App
 
-Easy and fast to use webiste which allow users to store their youtube films. User just put link or film id then film is stored in user Local Storage. App allow user to sorting and filtering films list.
+It's an easy and quick to use website which allows users to store their favourite youtube films ( in future more sites will be available ). The user just has to put a link to the video and then the film is stored in user Local Storage. The app also allows user to sort and filter a list of films.
 
 ## Live Link
 
@@ -16,12 +16,12 @@ https://pawior.github.io/video-app/
 
 ## Features
 
-- App show film statistics - views, like, title, thumbnail.
+- App shows film statistics - views, like, title, thumbnail.
 - Local Storage ( data are stored even after closing the page )
-- Add film to favourite list and filtering by favourite
+- Add films to favourite list and filtering by favourite
 - Sorting by newest/oldest/alphabetically
 - Hardocoded data if you'd like to test app
-- Modern and clear design
+- Modern web design
 - Support all youtube links type ( shorten, with channel name, etc. )
 
 ## Preview
