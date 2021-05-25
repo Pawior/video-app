@@ -16,11 +16,11 @@ https://pawior.github.io/video-app/
 
 ## Features
 
-- App shows film statistics - views, like, title, thumbnail.
+- The app shows film statistics - views, like, title, thumbnail.
 - Local Storage ( data are stored even after closing the page )
 - Add films to favourite list and filtering by favourite
 - Sorting by newest/oldest/alphabetically
-- Hardocoded data if you'd like to test app
+- Hardcoded data if you'd like to test the app
 - Modern web design
 - Support all youtube links type ( shorten, with channel name, etc. )
 
